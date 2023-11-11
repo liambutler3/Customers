@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Link } from 'react';
 
 export function Customers()
 {
@@ -8,7 +8,7 @@ export function Customers()
 
   // on load, get all customers
   useEffect(async () => {
-    const response = await fetch('/api/Customers');
+    const response = await fetch('/api/Customers/Get');
     const data = await response.json();
 
     // on load customers
@@ -19,7 +19,7 @@ export function Customers()
   }, []);
 
 
-  function onKeyPressed(e)
+  function onSearchChange(e)
   {
       setLoading(true);
 
@@ -45,7 +45,7 @@ export function Customers()
       return (
           <div class="input-group mb-3">
               <span class="input-group-text" id="button-addon1">Search By First Name</span>
-              <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" onChange={onKeyPressed} />
+              <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" onChange={onSearchChange} />
               {/*<button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>*/}
           </div>
       );
@@ -53,23 +53,31 @@ export function Customers()
 
   const renderCustomersTable = (customerList) => {
       return (
-      <div class="table-responsive">
-              <table className='table align-middle table-striped' aria-labelledby="tableLabel">
+          <div class="table-responsive">
+              <em>Note: Id is a generated index of the customers collection, using as a unqiue reference for each listed customer</em>
+
+          <table className='table align-middle table-striped' aria-labelledby="tableLabel">
             <thead>
               <tr>
+                <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
-              {customerList.map(customer =>
-                <tr key={customer.email}>
+              {customerList.map((customer, index) =>
+                  <tr key={customer.email}>
+                      <td>{index}</td>
                       <td>{customer.first_name}</td>
                       <td>{customer.last_name}</td>
                       <td>{customer.phone}</td>
                       <td>{customer.email}</td>
+                      <td>
+                      <a href={"/edit/" + index } class="btn btn-primary">Edit</a>
+                      </td>
                 </tr>
               )}
             </tbody>

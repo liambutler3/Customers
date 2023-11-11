@@ -56,7 +56,12 @@ namespace customers
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                name: "api",
+                pattern: "api/{controller}/{action=Index}/{id?}");
             });
+
 
             app.UseSpa(spa =>
             {
