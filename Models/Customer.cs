@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 namespace customers.models
 {
     public class Customer {
+
+        public int Id { get; set; }
+
         [JsonPropertyName("first_name")]
         public string FirstName { get; set; }
 

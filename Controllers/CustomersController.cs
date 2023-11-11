@@ -28,6 +28,17 @@ namespace customers.Controllers
                 var json = System.IO.File.ReadAllText(@"DataLayer\customersData.json");
 
                 var customers = JsonSerializer.Deserialize<Customer[]>(json);
+
+                var id = 0;
+                // create a unique id for each customer based of their index in the array
+                foreach (var customer in customers)
+                {
+                    customer.Id = id;
+                    id++;
+
+                    _logger.LogInformation($"Customer: {customer.FirstName} {customer.LastName}");
+                }
+                
                 return customers;
             }
 

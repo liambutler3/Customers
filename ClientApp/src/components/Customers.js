@@ -54,7 +54,7 @@ export function Customers()
   const renderCustomersTable = (customerList) => {
       return (
           <div class="table-responsive">
-              <em>Note: Id is a generated index of the customers collection, using as a unqiue reference for each listed customer</em>
+              <em>Note: Using the customer's collection index as a unique reference</em>
 
           <table className='table align-middle table-striped' aria-labelledby="tableLabel">
             <thead>
@@ -68,15 +68,15 @@ export function Customers()
               </tr>
             </thead>
             <tbody>
-              {customerList.map((customer, index) =>
-                  <tr key={customer.email}>
-                      <td>{index}</td>
+              {customerList.map(customer =>
+                  <tr key={customer.id}>
+                      <td>{customer.id}</td>
                       <td>{customer.first_name}</td>
                       <td>{customer.last_name}</td>
                       <td>{customer.phone}</td>
                       <td>{customer.email}</td>
                       <td>
-                      <a href={"/edit/" + index } class="btn btn-primary">Edit</a>
+                      <a href={"/edit/" + customer.id } class="btn btn-primary">Edit</a>
                       </td>
                 </tr>
               )}
