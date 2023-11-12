@@ -8,7 +8,7 @@ export function Customers()
 
   // on load, get all customers
   useEffect(async () => {
-    const response = await fetch('/api/Customers/Get');
+    const response = await fetch('/api/Customers/GetCustomers');
     const data = await response.json();
 
     // on load customers
@@ -17,7 +17,6 @@ export function Customers()
     setCustomers(data)
     setLoading(false);
   }, []);
-
 
   function onSearchChange(e)
   {
@@ -41,6 +40,45 @@ export function Customers()
       console.log(searchCustomers);
   }
 
+  function onDelete(e) {
+
+      console.log(e.target.value);
+
+      var id = e.target.value;
+    
+        if (window.confirm("Are you sure you want to delete this customer?")) {
+             fetch('/api/Customers/DeleteCustomer/' + id, {
+                  method: 'Post',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+             })
+/*                  .then(function (response) {
+                    console.log(response)
+                    return response.json();
+                  })*/
+                  .then(function (data) {
+                    // redirect to the customers page to refresh the list and regenerate the ids
+                    //window.location.href = "/";
+
+                    // remove the customer from the list
+                    var newCustomers = customers.filter(customer => customer.id != id);
+
+                    // redo the ids
+                    for (var i = 0; i < newCustomers.length; i++) {
+                        newCustomers[i].id = i;
+                    }
+
+                    setCustomers(newCustomers);
+
+                  }).catch(function (err) {
+                    console.log(err)
+                  });
+        }
+
+  }
+
+
   const searchElement = () => {
       return (
           <div class="input-group mb-3">
@@ -54,7 +92,6 @@ export function Customers()
   const renderCustomersTable = (customerList) => {
       return (
           <div class="table-responsive">
-              <em>Note: Using the customer's collection index as a unique reference</em>
 
           <table className='table align-middle table-striped' aria-labelledby="tableLabel">
             <thead>
@@ -65,6 +102,7 @@ export function Customers()
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -75,9 +113,8 @@ export function Customers()
                       <td>{customer.last_name}</td>
                       <td>{customer.phone}</td>
                       <td>{customer.email}</td>
-                      <td>
-                      <a href={"/edit/" + customer.id } class="btn btn-primary">Edit</a>
-                      </td>
+                      <td><a href={"/edit/" + customer.id } class="btn btn-primary">Edit</a></td>
+                      <td><button class="btn btn-danger" value={customer.id} onClick={onDelete}>Delete</button></td>
                 </tr>
               )}
             </tbody>

@@ -24,6 +24,7 @@ export function CustomerEdit()
         setLoading(false);
 
         console.log(data);
+        console.log(customer);
     }, []);
 
     function submitForm(e) {
@@ -44,7 +45,7 @@ export function CustomerEdit()
             method: 'POST',
             body: data
         })
-        /*         .then(function (response) {
+/*                 .then(function (response) {
             console.log(response)
             return response.json();
         })*/
@@ -69,13 +70,14 @@ export function CustomerEdit()
                     <input type="text" class="form-control" id="last_name" defaultValue={customer.last_name} />
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" defaultValue={customer.email} />
-                </div>
-                <div class="mb-3">
                     <label for="phone" class="form-label">Phone</label>
                     <input type="text" class="form-control" id="phone" defaultValue={customer.phone} />
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" defaultValue={customer.email} />
+                </div>
+
                 <button onClick={submitForm} class="btn btn-primary">Save</button>
             </form>
         );
@@ -85,7 +87,7 @@ export function CustomerEdit()
         ? <p><em>Loading...</em></p>
         :
         <>
-            {renderEditCustomerForm(customer[0])}
+            {renderEditCustomerForm(customer)}
         </>
 
   return (
