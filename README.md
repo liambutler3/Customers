@@ -153,6 +153,11 @@ Delete customer by refering to supplied JSON of the customer data.
 application/json
 
 
+## Testing
+### Unit Tests
+There's unit tests within the TestCustomers project for testing the data file source and its data.
+
+
 
 ## Improvements
-* Store the customer data in a database* Make the website more responsive* More search options* Allow inline editing of the customer records. So then don't need the CustomerEdit component and js.* Reload the table dynamically when records change in anyway.* Allow adding of new customers through the front-end too* More logging* More exception handling and try, catches* Add editing a record validation(s) for example email
+* Store the customer data in a database.* Make the website more responsive.* More search options.* Allow inline editing of the customer records. So don't need the CustomerEdit component and js.* Allow adding of new customers through the front-end too.* More logging.* More exception handling i.e. try and catches.* Add editing a record validation(s) for example email input and not empty strings.
