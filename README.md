@@ -5,6 +5,12 @@ This is a customer search application. It is built using .net core 3.1 and react
 * Install [dotnet core](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 * Install [node & npm](https://nodejs.org/en/download/)
 
+## Starting up the application
+* Might need to do a "npm install --force" terminal command in the ClientApp folder to install the node modules. For example:
+** cd C:\new\Customers-main\Customers-main\ClientApp
+**npm install --force
+
+
 ## Original Data Source
 ``` JSON
 [
